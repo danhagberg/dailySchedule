@@ -1,0 +1,27 @@
+CC = gcc -g -I../include -DSTANDALONE
+#CC = gcc -I../include
+
+LEX=flex -I -d -s
+YACC=bison -t -v --report=state
+
+MAC_TIME_OBJ=timeRoutinesOsx.o
+MAC_TIME_LIBS=-framework IOKit -framework CoreServices 
+
+OBJS=schedule.o scheduleParse.tab.o scheduleParse.yy.o $(MAC_TIME_OBJ)
+
+scheduleParser: $(OBJS)
+	$(CC) -o scheduleParser $(OBJS) -ll -ly $(MAC_TIME_LIBS)
+
+scheduleParse.tab.o: scheduleParse.tab.c 
+
+scheduleParse.yy.o: scheduleParse.yy.c scheduleParse.tab.h
+
+scheduleParse.tab.c scheduleParse.tab.h: scheduleParse.y
+	$(YACC) -d scheduleParse.y
+
+scheduleParse.yy.c: scheduleParse.l
+	$(LEX) -o scheduleParse.yy.c scheduleParse.l 
+
+clean:
+	$(RM) scheduleParser *.o scheduleParse.tab.h scheduleParse.tab.c scheduleParse.yy.c scheduleParse.output
+

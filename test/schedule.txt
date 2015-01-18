@@ -1,0 +1,43 @@
+// Schedule configuration file.
+// Use // for comments (beginning of line only)
+// Use # to customize. Allowed values are:
+// #reminder <command> D|A|P 
+//      Used to notify time for task. 
+//      Must be executable from command line.
+//      Use %s to include Reminder Message in command
+//      Where D = default, A = always, P = Private (Must be specified to run)
+#growl "growlnotify -s Reminder -m \"%s\"" D
+#say "say %s" D
+
+// Format of entries: 
+// Year Month DayOfMonth DayOfWeek (Sun=1) Hr Min Dur "Task" "Reminder Message" [defined cmd or command]
+
+// Misc
+* * * 2-6 10 30 60 "Exercise" "Go get some exercise you lazy bum!"
+* * * 2-6 12 0 60 "Lunch" "Lunch"
+
+// General Education
+* * * 3 17 0 60 "Game Theory" "Watch game theory lecture"
+
+// Job Hunt
+* * * 2-6 13 0 30 "Job Sites" "Check job sites for new jobs"
+* * * 2-6 13 30 60 "Interview Tests" "Complete one or more coding tests from Cracking the Coding Interview"
+
+// Math
+* * * 2,4,6 15 30 60 "Calculus" "Study Calculus"
+
+// Coding
+* * * 2 7 0 120 "Work on schedule.c" "Work on schedule project"
+* * * 3-6 7 0 210 "Data.gov" "Work on Data.gov project"
+* * * 3,5 17 0 60 "iPhone Class" "Watch iPhone Coding Lecture"
+
+// Computer Science 
+* * * 3,5 14 30 60 "Design Patterns" "Read a chapter out of the Design Patterns book"
+* * * 2,4,6 14 0 60 "Math for Computer Scientists" "Math for Computer Scientists"
+* * * 3,5 15 45 60 "Algorithms" "Read chapter of Algorithms book"
+
+// Cat Food Reminders
+* * * 2-5 5-20/3 30 5 "Cat Food" "Put away food bowls"
+* * * 2-5 7-20/3 30 5 "Cat Food" "Take out food bowls"
+* * * 1,7 6-20/3 30 5 "Cat Food" "Put away food bowls"
+* * * 1,7 8-20/3 30 5 "Cat Food" "Take out food bowls"

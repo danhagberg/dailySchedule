@@ -1,0 +1,35 @@
+#CC = gcc -g -I../../include -I ../include
+#CC = gcc -Wall -g -I../../include
+CC = gcc -I../../include
+MT = ./make-tests.sh 
+
+ifeq ($(TARGET_OS),linux) 
+	TIME_OBJ=../timeRoutinesLinux.o
+	TIME_LIBS=-lm
+else
+	TIME_OBJ=../timeRoutinesOsx.o
+	TIME_LIBS=-framework IOKit -framework CoreServices 
+endif
+
+OBJS = AllTests.o CuTest.o scheduleTest.o ../schedule.o ../scheduleParse.tab.o ../scheduleParse.yy.o $(TIME_OBJ)
+AllTests: $(OBJS)
+	$(CC) -o AllTests $(OBJS)  -ll -ly $(TIME_LIBS)
+
+AllTests.o: AllTests.c
+	$(CC) -c AllTests.c
+
+#AllTests.c: scheduleTest.c
+#	$(MT) > AllTests.c
+
+CuTest.o: CuTest.c
+	$(CC) -c CuTest.c
+
+scheduleTest.o: scheduleTest.c
+	$(CC) -c scheduleTest.c
+
+test: AllTests
+	-./AllTests
+
+clean:
+	$(RM) AllTests *.o 
+

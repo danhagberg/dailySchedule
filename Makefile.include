@@ -1,0 +1,45 @@
+#Must be first and will set the path relative to the invokind makefile
+TOP := $(dir $(lastword $(MAKEFILE_LIST)))
+#Make include file set all project options
+
+INC=-I ./ $(TARGET_INC) 
+
+LIBS = $(TARGET_LIBS) 
+#CC = gcc -g -Wall -I../include -DDEBUG
+#CC = gcc -std=c99 -Wall -g -I../include
+CC = gcc -I../include
+#CC=g++ -Wno-deprecated -Wall
+LD=gcc
+#Debug
+CCFLAGS=-g
+#Optimize
+#CCFLAGS=-O3
+
+#Commands
+MV=mv -f
+CP=cp -f
+TAGGEN=ctags -R .
+LEX=flex -I 
+YACC=bison -t -v 
+
+#Project specific directories
+PROJ_LIB_DIR=$(TOP)lib
+PROJ_BIN_DIR=$(TOP)bin
+PROJ_OBJ_DIR=$(TOP)obj
+PROJ_SRC_DIR=$(TOP)src
+PROJ_INC_DIR=$(TOP)include
+
+DEV_LIB_DIR=$(HOME)/dev/lib
+DEV_BIN_DIR=$(HOME)/dev/bin
+
+.SUFFIXES: .cpp .c
+
+.cpp.o :
+	$(CC) -c $< -o $@ $(CCFLAGS) $(INC)
+
+.c.o :
+	$(CC) -c $< -o $@ $(CCFLAGS) $(INC)
+
+$(PROJ_OBJ_DIR)/%.o: %.c
+	$(CC) -c $< -o $@ $(CCFLAGS) $(INC)
+

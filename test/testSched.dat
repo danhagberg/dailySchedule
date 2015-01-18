@@ -1,0 +1,11 @@
+#growl "growlnotify -s Reminder -m \"%s\"" A
+#say "say %s" D
+#echo "echo %s" D
+2010 10-11 4,5,6 * 13,14,15,17 45,50-55 30 "Task Name 1" "Reminder Text 1" #echo
+* * * 1 8-17/2 45 30 "Task Name 2" "Reminder Text 2" "say %s"
+* * * * * 1-59/3 30 "Task Name 3" "Reminder Text 3"
+* * * * * 2-58/2 30 "Task Name 4" "Reminder Text 4"
+* * * * 8 13 30 "Task Name 5" "Reminder Text 5" #say
+* * * * 8 13 30 "Task Name 6" "Reminder Text 6" "growlnotify -s Reminder -m \"%s\""
+* * * * * 1-59 1 "Task Name 7.1" "Reminder Text 7.1" 
+* * * * * 1-59 1 "Task Name 7.2" "Reminder Text 7.2"

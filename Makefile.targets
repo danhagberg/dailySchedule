@@ -1,0 +1,10 @@
+$(LIB) : $(LIBOBJS)
+	ar ru -s $@ $(LIBOBJS)
+
+$(TARGET) : $(LIB) $(OBJS) 
+	$(LD) -o $@ $(OBJS) $(LIBS)
+
+clean :
+	$(RM) $(OBJS) $(LIB) $(TARGET) core
+
+
